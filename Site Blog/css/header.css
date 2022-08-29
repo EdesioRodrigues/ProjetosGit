@@ -1,0 +1,56 @@
+header{
+    display: block;
+    padding: 30px 0 0 0;
+}
+
+.header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header .container .logo-title{
+    font-size: 100px;
+    background: -webkit-gradient(left, #ff1053 0%);
+    background: linear-gradient(to right, #ff1053 0%, #ff4f0f 100%);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-image: url('../img/gif.gif');
+
+}
+
+.header .nav{
+    width: 100%;
+    display: block;
+    border-bottom: 5px solid #000;
+}
+
+.header .nav .menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.header .nav .menu li{
+    display: block;
+}
+
+.header .nav .menu li a{
+    display: block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    transition: ease.4s;
+    margin-bottom: 20px;
+}
+
+.header .nav .menu li a:hover{
+background-color:rgb(13, 125, 216);
+color: #fff;
+}

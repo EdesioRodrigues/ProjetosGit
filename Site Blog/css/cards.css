@@ -1,0 +1,128 @@
+.card{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card.-cats{
+    height: 10em;
+}
+
+.card.-cats .link{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.card.-cats figure::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 2;
+    left: 0;
+    background-color: rgba(0,0,0.5);
+    z-index: 1;
+}
+
+.card.-cats figcaption{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: #fff;
+    z-index: 5;
+    transition: ease .5s;
+}
+
+.card.-cats img{
+    width: 100%;
+    transition: ease .5s;
+
+}
+
+.card.-cats:hover img{
+    transform: scale(1.5)rotate(5deg);
+}
+
+.card.-cats:hover figcaption{
+    transform: scale(1.15);
+}
+
+/*card post*/
+.card.-post{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0.08);
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+.card.-cats .link{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.card.-post .box-img{
+    width: 35%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card.-post .box-img img{
+    width: 100%;
+    border-radius: 4px;
+    transition: ease .5s;
+}
+
+.card.-post:hover img{
+    transform: scale(1.5)rotate(5deg);
+}
+
+.card.-post .box-content{
+    width: 65%;
+    padding: 1em 2em;
+}
+
+.card.-post .box-content h4{
+    margin: 0 0 1em 0;
+}
+
+.card.-post .box-content p{
+    margin: 0;
+    color: rgb(0, 0, 0,.5);
+}
+
+@media(max-width: 767.98px){
+    .card.-cats{
+        height: 200px;
+    }
+
+    .card.-post{
+        display: block;
+    }
+
+    .card.-post .box-img,
+    .card.-post .box-content{
+        width: 100%;
+        padding: 0;
+    }
+
+    .card.-post .box-content{
+        margin-top: 1em;
+    }
+}

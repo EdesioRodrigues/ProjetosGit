@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.title{
+    font-family:'Open Sans', sans-serif
+}
+
+.title.-border{
+    border-bottom: 5px solid #000;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+
+}
+
+section.section{
+    padding: 80px 0;
+}
+
+.card{
+    border: 1px solid  rgba(0,0,0,.08);
+}
+
+.load{
+    background-color: rgba(0, 0, 0, 0.64);
+    color: #fff;
+    display: block;
+    padding: 1em 2em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    transition: ease.4s;
+}
+
+.load:hover{
+    color: #fff;
+    opacity: .8;
+}

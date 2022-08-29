@@ -1,0 +1,66 @@
+anside{
+    width: 100%;
+}
+
+anside .title{
+    display: block;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+anside .box{
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(0, 0, 0,.08);
+}
+
+anside .box.-box-img img{
+    display: block;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 0.5em solid #000;
+    margin: 0 auto;
+}
+
+anside .box.-box-img p{
+    text-align: center;
+    font-size: 1em;
+    line-height: 2em;
+    margin: 1em 0 0 0;
+}
+
+
+anside .box.-box-tag .tags{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+}
+
+anside .box.-box-tag .tags li{
+    float: left;
+}
+
+anside .box.-box-tag .tags li a{
+    display: block;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin: 5px 5px 5px 0;
+    text-decoration: none;
+    transition: all .4s ease-in-out;
+}
+
+anside .box.-box-tag .tags li a:hover{
+opacity: .8;
+}
+
+.load:hover{
+    background-color:  rgb(13, 125, 216);
+}
