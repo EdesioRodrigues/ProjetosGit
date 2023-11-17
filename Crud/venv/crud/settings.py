@@ -115,6 +115,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'index.html'
 LOGOUT_REDIRECT_URL = ''
 
-SENDGRID_API_KEY =''
+SENDGRID_API_KEY ='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'
 
 
