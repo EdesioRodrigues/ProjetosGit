@@ -1,0 +1,97 @@
+{% extends 'menu.html' %}
+
+{% block content%}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Crud - Zold Brasil</title>
+</head>
+<body>
+    <!-- Exibindo as mensagens -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h2>Cadastro de Categoria</h2>
+                    </div>
+                    <div class="card-body">
+                        <form name="form" id="form" action="" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome da Categoria:</label>
+                                {{ form.nome|add_class:"form-control" }}
+                            </div>
+
+                            <div class="text-center mb-3">
+                                <input type="submit" class="btn btn-success" value="Salvar" name="salvar">
+                                <input type="submit" class="btn btn-primary" value="Nova Categoria" name="nova_categoria">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h3>Categorias Cadastradas</h3>
+        <form method="post" action="{% url 'delete_categorias' %}">
+            {% csrf_token %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select_all"></th>
+                        <th>Nome da Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr>
+                        <td><input type="checkbox" name="selected_categories" value="{{ categoria.id }}"></td>
+                        <td>{{ categoria.nome }}</td>
+                        <td>
+                            <a href="{% url 'edit_categoria' categoria.id %}"class="btn btn-primary ml-2 btn-sm mb-2" title="Editar"><i class="fas fa-edit"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Deletar
+            </button>
+            
+        </form>
+    </div>
+    
+    {% load static %}
+    <script src="{% static 'javascript.js' %}"></script>
+    <script>
+        document.getElementById('select_all').addEventListener('click', function() {
+            let checkboxes = document.querySelectorAll('input[name="selected_categories"]');
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+    </script>
+
+</body>
+</html>
+{% endblock %}

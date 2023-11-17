@@ -1,0 +1,87 @@
+{% extends 'menu.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8"> <!-- Ajustando a largura do formulário -->
+            <div class="text-center mb-4">
+                <h1>Cadastro</h1>
+                {{nome}}
+            </div>
+
+            <div id="result"></div>
+
+            <form name="form" id="form" action="{% if db %}/update/{{db.id}}/{% else %}/create/{% endif %}" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                  <label class="form-label">Nome:</label>
+                  {{ form.nome|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Email:</label>
+                  {{ form.email|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Telefone:</label>
+                  {{ form.telefone|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Cidade:</label>
+                  {{ form.cidade|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Estado:</label>
+                  {{ form.estado|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Início do Contrato:</label>
+                  {{ form.init_contrato|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Fim do Contrato:</label>
+                  {{ form.fim_contrato|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Periodicidade:</label>
+                  {{ form.periodicidade|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Serviço:</label>
+                  {{ form.servico|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Tipo:</label>
+                  {{ form.tipo|add_class:"form-control" }}
+              </div>
+      
+              <div class="mb-3">
+                  <label class="form-label">Setor:</label>
+                  {{ form.categoria|add_class:"form-control" }}
+              </div>
+
+                <div class="text-center mt-4 mb-2">
+                    <a href="/crud" class="btn btn-info">Voltar</a>
+                    <input type="submit" class="btn btn-success" value="Salvar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% load static %}
+<script src="{% static 'javascript.js ' %}"></script>
+
+{% endblock %}

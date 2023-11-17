@@ -1,0 +1,72 @@
+('C:\\Users\\edesi\\OneDrive\\Área de '
+ 'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\mysite.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\build\\mysite\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgres',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
+   'PYSOURCE'),
+  ('pyi_rth_django',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_django.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('manage',
+   'C:\\Users\\edesi\\OneDrive\\Área de '
+   'Trabalho\\VsCode\\Python\\Crud\\venv\\manage.py',
+   'PYSOURCE')],
+ 'python312.dll',
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)

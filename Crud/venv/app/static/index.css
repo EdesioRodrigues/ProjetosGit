@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Faz com que a altura mínima do container seja a altura da viewport */
+    margin-top: 5rem;
+  }
+  
+  .content {
+    text-align: center;
+  }
+
+
+  

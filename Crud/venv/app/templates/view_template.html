@@ -1,0 +1,27 @@
+{% extends "menu.html" %}
+{% block content %}
+    <style>
+        .container {
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: 5rem;
+            padding: 0 250px; /* Adiciona um padding horizontal */
+        }
+
+        .content {
+            text-align: center;
+            padding: 0 20px; /* Adiciona um padding horizontal */
+            max-width: 800px; /* Define uma largura máxima para o conteúdo */
+}
+
+    </style>
+    <div class="container">
+        <div class="content">
+            <h1>{{ template.subject }}</h1>
+            <div>
+                {{ template.body|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

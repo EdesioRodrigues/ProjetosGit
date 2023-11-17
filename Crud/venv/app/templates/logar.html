@@ -1,0 +1,29 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+        <main class="container mt-5">
+            <div class="row">
+                <div class="col-md-5 offset-md-3">
+                    <form  action="/logar/" method="POST" class="card card-body">
+
+                        {{ error }}
+
+                        {% csrf_token %}
+
+                        <h2 class="text-center">Logar</h2>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nome</label>
+                            <input type="text" class="form-control" name="username" id="username">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Logar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+{% endblock %}

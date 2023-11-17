@@ -1,0 +1,305 @@
+{% extends "menu.html" %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Form para filtrar clientes -->
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="mb-3">Filtros</h2>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="cidade">Cidade:</label>
+                <select name="cidade" id="cidade" class="form-control">
+                    <option value="">Selecione uma cidade</option>
+                    {% for cidade in cidades %}
+                        <option value="{{ cidade }}">{{ cidade }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="estado">Estado:</label>
+                <select name="estado" id="estado" class="form-control">
+                    <option value="">Selecione um estado</option>
+                    {% for estado in estados %}
+                        <option value="{{ estado }}">{{ estado }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="setor">Setor:</label>
+                <select name="setor" id="setor" class="form-control">
+                    <option value="">Selecione um setor</option>
+                    {% for setor in setores %}
+                        <option value="{{ setor }}">{{ setor }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="tipo">Tipo:</label>
+                <select name="tipo" id="tipo" class="form-control">
+                    <option value="">Selecione um tipo</option>
+                    {% for tipo in tipos %}
+                        <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="servico">Serviço:</label>
+                <select name="servico" id="servico" class="form-control">
+                    <option value="">Selecione um serviço</option>
+                    {% for servico in servicos %}
+                        <option value="{{ servico.id }}">{{ servico.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="periodicidade">Periodicidade:</label>
+                <select name="periodicidade" id="periodicidade" class="form-control">
+                    <option value="">Selecione uma periodicidade</option>
+                    {% for periodicidade in periodicidades %}
+                        <option value="{{ periodicidade.id }}">{{ periodicidade.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="categoria">Categoria:</label>
+                <select name="categoria" id="categoria" class="form-control mb-2">
+                    <option value="">Selecione uma categoria</option>
+                    {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Aplicar Filtros" class="btn btn-primary btn-block">
+
+            </div>
+        </div>
+    </form>
+    <!-- Lista de clientes filtrados -->
+    <div class="mb-4">
+        <h3>Clientes filtrados:</h3>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered"  id="clientesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>Nome</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Periodicidade</th>
+                        <th>Serviço</th>
+                        <th>Tipo</th>
+                        <th>Setor</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td><input type="checkbox" name="clientes_selecionados" value="{{ cliente.id }}"></td>
+
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.cidade }}</td>
+                        <td>{{ cliente.estado }}</td>
+                        <td>{{ cliente.periodicidade }}</td>
+                        <td>{{ cliente.servico }}</td>
+                        <td>{{ cliente.tipo }}</td>
+                        <td>{{ cliente.setor }}</td>
+                        <td>
+                            {% for categoria in cliente.categoria.all %}
+                                {{ categoria.nome }},
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mb-4">
+        <h3>Modelos de Email:</h3>
+        <button class="btn btn-primary mb-3" onclick="loadEmailTemplates()">Carregar Modelos de Email</button>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="emailTemplatesTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Select</th>
+                        <th>Título do Modelo</th>
+                    </tr>
+                </thead>
+                <tbody id="templates-container">
+                    <!-- Os modelos de email serão carregados aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!--Carregamento dos modelos-->
+    <script>
+          function loadEmailTemplates() {
+    fetch('/get_email_templates/')
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('templates-container');
+        container.innerHTML = '';
+        data.forEach(template => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="radio" name="email_template" value="${template.id}" onclick="event.stopPropagation();"></td>
+                <td>${template.subject}</td>
+            `;
+            tr.addEventListener('click', () => {
+                const radioButton = tr.querySelector('input[type="radio"]');
+                radioButton.checked = true;
+                fillEmailForm(template.subject, template.body);
+            });
+            container.appendChild(tr);
+        });
+    })
+    .catch(error => console.error('Error fetching email templates:', error));
+}
+    </script>
+    
+
+    <div class="email-preview-container mt-4">
+        <div id="email-preview" style="border: 1px solid #ccc; padding: 100px;" contenteditable="true"></div>
+    </div>
+    
+    <script>
+        function removeHtmlTags(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+}
+
+function fillEmailForm(subject, body) {
+    // Atualizando o campo de assunto
+    const subjectField = document.getElementById('email_subject');
+    subjectField.value = subject;
+
+    // Atualizando a área de texto do corpo do e-mail
+    const bodyField = document.getElementById('email_body');
+    const htmlOverlay = document.getElementById('html-overlay');
+    const emailBodyHtmlField = document.getElementById('email_body_html'); // Campo oculto para o HTML
+
+    // Atualizando a visualização do corpo do e-mail
+    const emailPreview = document.getElementById('email-preview');
+    emailPreview.innerHTML = `<h1>${subject}</h1>${body}`;
+
+    // Atualiza o campo oculto com o HTML inicial
+    emailBodyHtmlField.value = emailPreview.innerHTML;
+
+    // Adiciona o event listener para atualizar o campo oculto sempre que o conteúdo do preview é editado
+    emailPreview.addEventListener('input', function() {
+        emailBodyHtmlField.value = emailPreview.innerHTML;
+    });
+
+    // Verifica se o corpo do e-mail é HTML
+    if (body.trim().startsWith('<')) {
+        // Se for HTML, mostra a sobreposição e esconde o campo de texto
+        htmlOverlay.style.display = 'flex';
+        bodyField.style.display = 'none';
+    } else {
+        // Se não for HTML, esconde a sobreposição e mostra o campo de texto
+        htmlOverlay.style.display = 'none';
+        bodyField.style.display = '';
+    }
+
+    // Mantém o texto no campo de texto em ambos os casos
+    bodyField.value = body;
+}
+
+    </script>
+    
+    <!-- Form para enviar emails -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2 class="text-center modern-subtle-title">Enviar Emails aos Clientes Selecionados</h2>
+            <div id="templates-container"></div>
+
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'send_email' %}" enctype="multipart/form-data" id="formEmail">
+                {% csrf_token %}
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+                
+                <!-- Adicione esta parte onde você quer que o campo de upload apareça -->
+                <div class="mb-3">
+                    <label for="clientExcelFile" class="form-label">Carregar Excel de Clientes:</label>
+                    <input type="file" class="form-control" id="clientExcelFile" name="clientExcelFile" accept=".xlsx, .xls">
+                </div>
+
+                <div class="form-group">
+                    <label for="email_user">E-mail:</label>
+                    <input type="email" id="email_user" name="email_user" class="form-control" value="{{ user.username }}" readonly>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email_password">Senha:</label>
+                    <input type="password" id="email_password" name="email_password" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email_subject">Assunto do Email:</label>
+                    <input type="text" id="email_subject" name="email_subject" class="form-control" required>
+                </div>
+                
+                <div class="form-group" style="position: relative;">
+                    <label for="email_body">Corpo do Email:</label>
+                    <textarea id="email_body" name="email_body" class="form-control" rows="5" required></textarea>
+                    <div id="html-overlay" style="display:none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: white; opacity: 0.9; display: flex; justify-content: center; align-items: center;">
+                        <i class="fa-brands fa-html5 fa-2xl" style="color: #b42222;"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="email_attachment" class="form-label">Anexar Arquivos:</label>
+                    <div>
+                        <input type="file" class="form-control form-control-sm" id="email_attachment" name="email_attachment">
+                    </div>
+                </div>
+                
+                <div class="form-group mt-4">
+                    <input type="submit" value="Enviar Emails" class="btn btn-primary btn-block">
+                </div>
+                <input type="hidden" id="email_body_html" name="email_body_html">
+            </form>
+        </div>
+    </div>
+    
+    <div id="result" class="mt-3"></div>
+
+    {% block scripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tableBody = document.querySelector("#clientesTable tbody");
+
+        tableBody.addEventListener("click", function(event) {
+            // Se o clique foi no checkbox, sair para evitar loop infinito
+            if (event.target.type === "checkbox") {
+                return;
+            }
+            
+            let target = event.target;
+            
+            // Procura o elemento TR mais próximo (a linha da tabela)
+            while (target.nodeName.toLowerCase() !== "tr") {
+                target = target.parentElement;
+            }
+
+            // Tenta encontrar um checkbox dentro dessa linha
+            const checkbox = target.querySelector('input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    });
+    
+</script>
+</div>
+{% endblock scripts%}
+{% endblock %}

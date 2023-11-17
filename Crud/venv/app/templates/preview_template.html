@@ -1,0 +1,9 @@
+{% extends "menu.html" %}
+{% block content %}
+<div style="padding: 10px; text-align: center; max-width: 400px; margin: auto;">
+    <h3>{{ template.subject }}</h3>
+    <div>
+        {{ template.body|safe }}
+    </div>
+</div>
+{% endblock %}

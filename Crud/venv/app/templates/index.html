@@ -1,0 +1,106 @@
+{% extends 'menu.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h1>Crud - Zold Brasil</h1>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            {{ nome }}
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <a href="/form" class="btn btn-success">Adicionar</a>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <form action="/arquivos/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file" class="form-control mb-2">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <form method="get">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Buscar">
+            </form>
+        </div>
+
+        <div class="col-12 mt-3 offset-1  ">
+            <div class="table-responsive">
+                <table class="table table-hover large-table"> 
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Init - Contrato</th>
+                            <th scope="col">Fim - Contrato</th>
+                            <th scope="col">Periodicidade</th>
+                            <th scope="col">Serviço</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Setor</th>
+                            <th scope="col">Ações</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dbs in db.object_list %}
+                            <tr>
+                                <th>{{dbs.id}}</th>
+                                <td>{{dbs.nome}}</td>
+                                <td>{{dbs.email}}</td>
+                                <td>{{dbs.telefone}}</td>
+                                <td>{{dbs.cidade}}</td>
+                                <td>{{dbs.estado}}</td>
+                                <td>{{dbs.init_contrato}}</td>
+                                <td>{{dbs.fim_contrato}}</td>
+                                <td>{{dbs.periodicidade}}</td>
+                                <td>{{dbs.servico}}</td>
+                                <td>{{dbs.tipo}}</td>
+                                <td>
+                                    {% for categoria in dbs.categoria.all %}
+                                        {{ categoria.nome }}
+                                        {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </td>
+                                
+                                <td>
+                                    <a href="/view/{{dbs.id}}/" class="btn btn-dark btn-sm mb-2" title="Detalhes"><i class="fas fa-eye"></i></a>
+                                    <a href="/edit/{{dbs.id}}/" class="btn btn-primary ml-2 btn-sm mb-2" title="Editar"><i class="fas fa-edit"></i></a>
+                                    <a href="/delete/{{dbs.id}}/" class="btn btn-danger ml-2 btnDel btn-sm mb-2" title="Deletar"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12 text-center mt-3">
+            <div class="pagination">
+                {% if db.has_previous %}
+                    <a class="pagination-btn pagination-prev" href="?page={{db.previous_page_number}}"> < </a>
+                {% endif %}
+
+                <span class="pagination-number">{{db.number}}</span>
+
+                {% if db.has_next %}
+                    <a class="pagination-btn pagination-next" href="?page={{db.next_page_number}}"> > </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'javascript.js' %}"></script>
+{% endblock %}
+qw
